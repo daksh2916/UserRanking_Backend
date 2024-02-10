@@ -1,5 +1,3 @@
-
-
 const User = require("../models/User");
 const Score = require("../models/Score");
 
@@ -16,15 +14,15 @@ exports.updateUserScore = async (req, res) => {
 
         // Update User collection
         const updatedUser = await User.findOneAndUpdate(
-            { userid },
-            { updatedAt: new Date() }, // Update updatedAt to current time
+            { userid: userid },
+            { $set: { updatedAt: new Date() } },
             { new: true }
         );
 
         // Update Score collection
         const updatedScore = await Score.findOneAndUpdate(
-            { userid },
-            { score, updatedAt: new Date() }, // Update updatedAt to current time
+            { userid: userid },
+            { score: score, updatedAt: new Date() },
             { new: true }
         );
 
@@ -42,4 +40,8 @@ exports.updateUserScore = async (req, res) => {
         });
     }
 }
+
+
+
+
 
